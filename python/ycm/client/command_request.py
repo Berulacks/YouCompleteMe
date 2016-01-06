@@ -87,7 +87,7 @@ class CommandRequest( BaseRequest ):
     if isinstance( self._response, list ):
       defs = [ _BuildQfListItem( x ) for x in self._response ]
       vim.eval( 'setqflist( %s )' % repr( defs ) )
-      vim.eval( 'youcompleteme#OpenGoToList()' )
+      vim.eval( 'youcompleteme#OpenGoToList(%d)' % len(defs) )
     else:
       vimsupport.JumpToLocation( self._response[ 'filepath' ],
                                  self._response[ 'line_num' ],

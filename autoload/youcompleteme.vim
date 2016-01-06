@@ -823,10 +823,14 @@ function! s:CompleterCommand(...)
 endfunction
 
 
-function! youcompleteme#OpenGoToList()
+function! youcompleteme#OpenGoToList(...)
   set lazyredraw
   cclose
-  execute 'belowright copen 3'
+  if a:0 > 0 
+      execute 'belowright copen ' . a:1
+  else
+      execute 'belowright copen 3'
+  endif
   set nolazyredraw
   au WinLeave <buffer> q  " automatically leave, if an option is chosen
   redraw!
