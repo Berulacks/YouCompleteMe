@@ -36,7 +36,8 @@ class CommandRequest( BaseRequest ):
     self._completer_target = ( completer_target if completer_target
                                else 'filetype_default' )
     self._is_goto_command = (
-        self._arguments and self._arguments[ 0 ].startswith( 'GoTo' ) )
+        self._arguments and ( self._arguments[ 0 ].startswith( 'GoTo' ) 
+                        or self._arguments[ 0 ].startswith( 'FindUsages' ) ) )
     self._is_fixit_command = (
         self._arguments and self._arguments[ 0 ].startswith( 'FixIt' ) )
     self._response = None
@@ -104,7 +105,6 @@ class CommandRequest( BaseRequest ):
       vimsupport.EchoTextVimWidth( "FixIt applied "
                                    + str( len( chunks ) )
                                    + " changes" )
-
 
   def _HandleBasicResponse( self ):
     vimsupport.EchoText( self._response )
